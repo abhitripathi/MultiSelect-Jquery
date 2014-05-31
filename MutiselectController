@@ -1,0 +1,32 @@
+/**         
+  * Description     :   This is controller class for the mutli select picklist using jquery.   
+  *      
+  * Created By      :   Abhi Tripathi
+  *
+  * Created Date    :   5/17/2014
+  *
+  * Version         :   V1.0 Created
+  *
+  **/
+public class MutiselectController {
+
+    //String
+    public String getSelectedValue {get; set;}
+
+    //This method is to create a select option list for given Picklist Entries
+    public static List<SelectOption> getSelectOptionListByField() {
+        
+        //Describe field and create a list of select options
+        List<SelectOption> listOptions = new List<SelectOption>();
+        
+        //loop throough the picklist entries and populate select list
+        for (Schema.PicklistEntry pE : Schema.getGlobalDescribe().get('Contact').getDescribe().fields.getMap().get('Multi_Select__c').getDescribe().getPickListValues()) {
+         
+            //Populate the select list with values
+            listOptions.add(new SelectOption(pE.getValue() , pE.getLabel()));  
+        }
+        
+        //Return list
+        return listOptions;
+    } 
+}
